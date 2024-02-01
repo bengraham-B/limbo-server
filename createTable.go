@@ -18,6 +18,7 @@ func createTable() {
 		id UUID,
 	
 		file_name VARCHAR(255),
+		file_type VARCHAR(255),
 		file_Content TEXT
 	)`)
 
