@@ -1,4 +1,4 @@
-const testAPI  = async () => {
+const insertData  = async () => {
     const response = await fetch("http://localhost:8080/create", {
         method: "POST",
         body: JSON.stringify({
@@ -16,4 +16,22 @@ const testAPI  = async () => {
     console.log(data)
 }
 
-testAPI()
+const readData  = async () => {
+    const response = await fetch("http://localhost:8080/read", {
+        method: "POST",
+        body: JSON.stringify({
+            fileName: "py.py",
+        }),
+        headers: {
+            "Content-Type":"application/json"
+        }
+    })
+
+    const data = await response.json()
+
+    console.log(data)
+}
+
+// insertData()
+
+readData()

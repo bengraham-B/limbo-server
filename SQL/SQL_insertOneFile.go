@@ -1,6 +1,8 @@
-package main
+package SQL_LIMBO
 
-import "fmt"
+import (
+	"fmt"
+)
 
 func SQL_insertData(fileName string, fileType string, fileContent string) {
 	db, err := connectDB() //^ Connect to the db

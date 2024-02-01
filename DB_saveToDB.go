@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	SQL_LIMBO "main/SQL"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -27,7 +28,7 @@ func saveToDB(c *gin.Context) {
 
 	fmt.Println("Recieved:", fileName, fileType, fileContent)
 
-	SQL_insertData(fileName, fileType, fileContent)
+	SQL_LIMBO.SQL_insertData(fileName, fileType, fileContent)
 
 	c.JSON(http.StatusOK, gin.H{"message": "Request processed successfully"})
 
