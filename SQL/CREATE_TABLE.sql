@@ -4,5 +4,6 @@ CREATE TABLE IF NOT EXISTS limbo(
     PRIMARY KEY(pk),
     UNIQUE(id),
 
-    
+    file_name VARCHAR(255)
+    file_Content TEXT
 )

@@ -10,13 +10,13 @@ import (
 // ^ Connect to Database
 const (
 	host     = "localhost"
-	port     = 5433
+	port     = 5432
 	user     = "postgres"
 	password = "root"
 	dbname   = "limbo"
 )
 
-func connectDB() {
+func connectDB() (*sql.DB, error) {
 	psqlInfo := fmt.Sprintf("host=%s port=%d user=%s "+"password=%s dbname=%s sslmode=disable", host, port, user, password, dbname)
 
 	//^ Oppenning the connection
@@ -24,7 +24,7 @@ func connectDB() {
 
 	if err != nil {
 		fmt.Println("Error openning DB connection", err)
-		return
+		return nil, err
 	}
 
 	fmt.Println("")
@@ -36,5 +36,5 @@ func connectDB() {
 		panic(err)
 	}
 
-	defer db.Close()
+	return db, nil
 }
