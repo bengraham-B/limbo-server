@@ -1,4 +1,4 @@
-package SQL_LIMBO
+package main
 
 import (
 	"database/sql"
@@ -10,20 +10,24 @@ import (
 // ^ Connect to Database
 const (
 	host     = "localhost"
-	port     = 5432
+	port     = 5433
 	user     = "postgres"
 	password = "root"
 	dbname   = "limbo"
 )
 
-func connectDB() (*sql.DB, error) {
+func CONN_DB() (*sql.DB, error) {
+
+	//^ Connection String
 	psqlInfo := fmt.Sprintf("host=%s port=%d user=%s "+"password=%s dbname=%s sslmode=disable", host, port, user, password, dbname)
 
-	//^ Oppenning the connection
+	//^ Openning the Connection
 	db, err := sql.Open("postgres", psqlInfo)
 
 	if err != nil {
-		fmt.Println("Error openning DB connection", err)
+		fmt.Printf("[ERROR: 1] - [Cannot open DB: %v] - [File: DB_CONN] - (ERROR: %v)", dbname, err)
+		gooseLogger("Error", 1, "Cannot Open DB: Limbo", "DB_CONN.go", err)
+
 		return nil, err
 	}
 
@@ -31,10 +35,14 @@ func connectDB() (*sql.DB, error) {
 	fmt.Printf("Connected to Database: [%v] 🐳\n", dbname)
 	fmt.Println("")
 
+	//^ Pinning the DB
 	err = db.Ping()
 	if err != nil {
-		panic(err)
+		gooseLogger("Error", 2, "Cannot ping DB: Limbo", "DB_CONN.go", err)
+		return nil, err
 	}
 
-	return db, nil
+	gooseLogger("Success", 3, "Returning DB variable", "DB_CONN.go", nil)
+	return db, err
+
 }
