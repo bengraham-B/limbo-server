@@ -23,6 +23,10 @@ func main() {
 
 	})
 
+	router.POST("/file", func(c *gin.Context) {
+		fileStruct.DB_ReadoneFile(c)
+	})
+
 	router.Run("localhost:8001")
 
 }
