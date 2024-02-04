@@ -53,6 +53,8 @@ func (F *FILE_STRUCT) SQL_ReadOneFile() map[string]string {
 func (F *FILE_STRUCT) DB_ReadoneFile(c *gin.Context) {
 	var requestBody FILE_STRUCT
 
+	fmt.Println(requestBody)
+
 	if err := c.ShouldBindJSON(&requestBody); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
